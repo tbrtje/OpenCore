@@ -1,9 +1,35 @@
 OpenCore Changelog
 ==================
 
+#### v0.6.0
+- Fixed sound corruption with AudioDxe
+- Fixed icon choice for Apple FW update in OpenCanopy
+- Fixed APFS driver loading on Fusion Drive
+- Added Comet Lake HDA device code
+- Fixed audio stream position reporting on non-Intel platforms
+- Added `Firmware` mode to `ResetSystem` to reboot into preferences
+- Replaced `BlacklistAppleUpdate` with `run-efi-updater` NVRAM variable
+- Fixed reset value in `FadtEnableReset` ACPI quirk
+- Fixed freezes during boot option expansion with PXE boot entries
+- Updated underlying EDK II package to edk2-stable202005
+- Added `ProvideMaxSlide` quirk to improve laptop stability, thx @zhen-zen
+- Fixed slide choice on platforms when 0 slide is unavailable, thx @zhen-zen
+- Fixed assertions caused by unaligned file path access in DEBUG builds
+- Renamed `ConfigValidity` utility to `ocvalidate` for consistency
+- Added `GlobalConnect` for APFS loading to workaround older firmware issues
+- Added 11.0 support for `AvoidRuntimeDefrag` Booter quirk
+- Fixed 11.0 lapic kernel quirk as of DP1
+- Improved boot selection scripts for macOS without NVRAM
+- Added UGA protocol compatibility in `ProvideConsoleGop` quirk
+- Added `UgaPassThrough` option to support UGA protocol over GOP
+- Added `AppleFramebufferInfo` protocol implementation and override
+- Fixed serial initialisation when file logging is disabled
+- Fixed FSBFrequency reporting on Meron and similar CPUs
+- Fixed incorrect volume icon dimension requirements in OpenCanopy
+
 #### v0.5.9
 - Added full HiDPI support in OpenCanopy
-- Improved font rendering by using CoreText
+- Improved OpenCanopy font rendering by using CoreText
 - Fixed light and custom background font rendering
 - Added `Boot####` options support in boot entry listing
 - Removed `HideSelf` by pattern recognising `BOOTx64.efi`
@@ -13,6 +39,38 @@ OpenCore Changelog
 - Changed NVRAM reset not to erase `BootProtect` boot options
 - Improved boot performance when picker UI is disabled
 - Enforced the use of builtin picker when external fails
+- Fixed warnings for empty NVRAM variables (e.g. rtc-blacklist)
+- Added `ApplePanic` to store panic logs on ESP root
+- Fixed `ReconnectOnResChange` reconnecting even without res change
+- Fixed OpenCanopy showing internal icons for external drives
+- Fixed OpenCanopy launching Shell with text over it
+- Added partial hotkey support to OpenCanopy (e.g. Ctrl+Enter)
+- Added builtin text renderer compatibility with Shell page mode
+- Fixed `FadtEnableReset` with too small FACP tables and some laptops
+- Fixed CPU detection crash with QEMU 5.0 and KVM accelerator
+- Removed `RequestBootVarFallback` due to numerous bugs
+- Added `DeduplicateBootOrder` UEFI quirk
+- Removed `DirectGopCacheMode` due to being ineffective
+- Fixed assertions on log exhaustion causing boot failures
+- Fixed builtin text renderer failing to provide ConsoleControl
+- Fixed compatibility with blit-only GOP (e.g. OVMF Bochs)
+- Fixed ignoring `#` in DeviceProperty and NVRAM `Delete`
+- Renamed `Block` to `Delete` in `ACPI`,`DeviceProperties`, and `NVRAM`
+- Added MacBookPro16,2 and MacBookPro16,3 model codes
+- Added PCI device scanning policy support (e.g. VIRTIO)
+- Improved playback performance in AudioDxe
+- Updated builtin firmware versions for SMBIOS and the rest
+- Added improved CPU type detection for newer CPU types
+- Added ConfigValidity utility and improved config validation
+- Added serial port initialisation for serial debug logging
+- Disabled empty debug log file creation to avoid ESP cluttering
+- Added `TscSyncTimeout` quirk to workaround debug kernel assertions
+- Added first-class Windows support to bless model
+- Fixed `LapicKernelPanic` kernel quirk on 10.9
+- Added prebuilt version of `CrScreenshotDxe` driver
+- Fixed Hyper-V frequency detection compatibility
+- Added `SysReport` option for DEBUG builds to dump system info
+- Fixed crashes on some AMD firmwares when performing keyboard input
 
 #### v0.5.8
 - Fixed invalid CPU object reference in SSDT-PLUG
