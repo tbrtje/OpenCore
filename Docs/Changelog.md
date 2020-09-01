@@ -1,5 +1,36 @@
 OpenCore Changelog
 ==================
+#### v0.6.1
+- Improved recognition of early pressed hotkeys, thx @varahash
+- Made DMG loading support configurable via `DmgLoading`
+- Added iMac20,1 and iMac20,2 model codes
+- Fixed display name for older Xeon CPUs like Xeon E5450
+- Added Comet Lake-LP HDA device code
+- Fixed OS boot selection on SATA controllers with legacy OPROMs
+- Fixed RSDP ACPI table checksum recalculation
+- Added immutablekernel loading support for 10.13+
+- Fixed solving some symbols to zero in 11.0 kext inject
+- Reduced OpenCanopy size by restricting boot management access
+- Added `BuiltinText` variant for `TextRenderer` for older laptops
+- Fixed `SyncRuntimePermissions` creating invalid MAT table
+- Added EFI FAT image loading support (macOS 10.8 and earlier)
+- Added 64-bit cacheless kext injection and patching support (macOS 10.9 and earlier)
+- Added 64-bit mkext kext injection and patching support (macOS 10.6 and earlier)
+- Fixed XNU hook matching non-kernel files
+- Updated builtin firmware versions for SMBIOS and the rest
+- Fixed patching of ACPI tables in low memory
+- Fixed macOS 11.0 DMG recovery loading without hotplug
+- Fixed `XhciPortLimit` quirk on 10.12.6 and possibly other versions
+- Fixed `IncreasePciBarSize` quirk on 10.11.5 and possibly other versions
+- Fixed `LapicKernelPanic` quirk on 10.8.5 and possibly other versions
+- Fixed hard-lock caused by EHCI SMI in OpenDuetPkg
+- Added preview UEFI Secure Boot compatibility
+- Added `FuzzyMatch` option to support fuzzy kernelcache matching on 10.6 and earlier
+- Added `KernelArch` option to specify architecture preference on older kernels
+- Added `KernelCache` option to specify kernel caching preference for older kernels
+- Added `Force` section to provide support for injecting drivers in older macOS
+- Changed kernel driver injection to happen prior to kernel driver patching
+- Added `Arch` filtering option to `Add`, `Block`, `Force`, and `Patch` sections
 
 #### v0.6.0
 - Fixed sound corruption with AudioDxe
@@ -9,7 +40,7 @@ OpenCore Changelog
 - Fixed audio stream position reporting on non-Intel platforms
 - Added `Firmware` mode to `ResetSystem` to reboot into preferences
 - Replaced `BlacklistAppleUpdate` with `run-efi-updater` NVRAM variable
-- Fixed reset value in `FadtEnableReset` ACPI quirk
+- Fixed reset value and detection in `FadtEnableReset` ACPI quirk
 - Fixed freezes during boot option expansion with PXE boot entries
 - Updated underlying EDK II package to edk2-stable202005
 - Added `ProvideMaxSlide` quirk to improve laptop stability, thx @zhen-zen
@@ -26,6 +57,18 @@ OpenCore Changelog
 - Fixed serial initialisation when file logging is disabled
 - Fixed FSBFrequency reporting on Meron and similar CPUs
 - Fixed incorrect volume icon dimension requirements in OpenCanopy
+- Added preview version of KernelCollection injection code
+- Fixed ACPI reset register detection in DxeIpl
+- Added MacBookPro16,4 model code
+- Updated builtin firmware versions for SMBIOS and the rest
+- Fixed OSXSAVE reporting when emulating CPUID on newer CPUs
+- Added `SerialInit` option to perform serial initialisation separately
+- Fixed OpenDuetPkg booting on Intel G33 with SATA controller in RAID mode
+- `PlatformInfo` `Automatic` for all models
+- Fixed 32-bit OpenDuetPkg booting on machines with over 4 GBs of RAM
+- Fixed delays with OpenDuetPkg booting with certain SATA controllers in IDE mode
+- Fixed display name for some high core count i9 CPUs like 7920X
+- Fixed SSDT-EC-USBX
 
 #### v0.5.9
 - Added full HiDPI support in OpenCanopy
